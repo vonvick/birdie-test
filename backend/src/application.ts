@@ -1,8 +1,14 @@
 import * as express from "express";
-import {pingController} from "./controllers/ping";
+import * as cors from "cors";
+import routes from "./routes";
 
 const app = express();
+app.use(cors());
+const router = express.Router();
 
-app.use(pingController);
+routes(router);
+
+app.use(express.json());
+app.use("/api", router);
 
 export default app;

@@ -14,7 +14,9 @@
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "test": "jest",
     "test:watch": "jest --watch",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "build": "yarn clean && tsc",
+    "start": "node ./lib/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

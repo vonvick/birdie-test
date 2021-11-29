@@ -1,4 +1,5 @@
 import { Connection, createConnection } from "typeorm";
+import { Events } from './entities/events'
 
 export const createDatabaseConnection =
   async (): Promise<Connection | void> => {
@@ -9,7 +10,9 @@ export const createDatabaseConnection =
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [__dirname + "/entities/events.ts"],
+      entities: [
+        Events
+      ],
       synchronize: false,
       logging: false,
     });

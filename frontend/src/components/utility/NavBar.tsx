@@ -33,6 +33,7 @@ const StyledMenuListItem = styled.li`
   a {
     text-decoration: none;
     color: black;
+    font-weight: bold;
   }
 `;
 

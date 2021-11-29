@@ -18,13 +18,17 @@ export const eventTypesSlice = createSlice({
     setEventTypesStatus: (state, action: PayloadAction<Status>) => {
       return { ...state, eventTypesStatus: action.payload }
     },
-    fetchEventTypes: () => {}
+    fetchEventTypes: () => {},
+    clearEventTypesStore: (state) => {
+      eventTypesAdapter.removeAll(state)
+    }
   }
 });
 
-export const { setEventsType, setEventTypesStatus, fetchEventTypes } = eventTypesSlice.actions;
+export const { setEventsType, setEventTypesStatus, fetchEventTypes, clearEventTypesStore } = eventTypesSlice.actions;
 export const {
-  selectAll: selectAllEventTypes
+  selectAll: selectAllEventTypes,
+  selectById: selectEventTypeById
 } = eventTypesAdapter.getSelectors((state: RootState) => state.eventTypes);
 
 export default eventTypesSlice.reducer;

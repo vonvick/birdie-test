@@ -5,25 +5,84 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core"
+import {
+  faExclamation,
+  faBell,
+  faStethoscope,
+  faUserCheck,
+  faCalendarCheck,
+  faExclamationTriangle,
+  faCoffee,
+  faHamburger,
+  faBed,
+  faHeartbeat,
+  faNotesMedical,
+  faBrain,
+  faAmbulance,
+  faSmileBeam,
+  faLaptopMedical,
+  faUserMd,
+  faHandHoldingMedical,
+  faPumpMedical,
+  faFilePrescription,
+  faPrescriptionBottle,
+  faCheckCircle,
+  faUndo,
+  faPencilAlt,
+  faRestroom,
+  faWindowClose,
+  faCheckSquare,
+  faCircleNotch
+} from '@fortawesome/free-solid-svg-icons'
 import './App.css';
 import { fetchRecipients } from "./redux/features/recipients/recipientSlice";
 import CareRecipientsList from "./components/pages/CareRecipientsList";
 import RecipientEvents from "./components/pages/RecipientEvents";
 import NavBar from "./components/utility/NavBar";
 import styled from "styled-components";
-import {fetchEventTypes} from "./redux/features/eventsTypes/eventTypesSlice";
+import {clearEventTypesStore, fetchEventTypes} from "./redux/features/eventsTypes/eventTypesSlice";
+
+library.add(faExclamation,
+  faBell,
+  faStethoscope,
+  faUserCheck,
+  faCalendarCheck,
+  faExclamationTriangle,
+  faCoffee,
+  faHamburger,
+  faBed,
+  faHeartbeat,
+  faNotesMedical,
+  faBrain,
+  faAmbulance,
+  faSmileBeam,
+  faLaptopMedical,
+  faUserMd,
+  faHandHoldingMedical,
+  faPumpMedical,
+  faFilePrescription,
+  faPrescriptionBottle,
+  faCheckCircle,
+  faUndo,
+  faPencilAlt,
+  faRestroom,
+  faWindowClose,
+  faCheckSquare,
+  faCircleNotch
+);
 
 const StyledAppWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 10px;
 `;
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(clearEventTypesStore())
     dispatch(fetchEventTypes())
   }, [dispatch]);
 

@@ -16,10 +16,11 @@ export function* handleRecipientEvents(action: PayloadAction<PaginationRequestIn
       const { data } = response;
       yield put(setEvents(data.data));
       yield put(setPagination({ ...data.pagination }));
+      yield put(setEventStatus("loaded"))
     } else {
       yield put(setEventStatus("completed"));
     }
   } catch (error) {
-    console.log(error);
+    yield put(setEventStatus("error"))
   }
 }

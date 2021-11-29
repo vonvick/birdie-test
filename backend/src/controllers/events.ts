@@ -19,6 +19,7 @@ export const EventsController = {
       const [data, count] = await eventsRepository
         .createQueryBuilder("event")
         .where("care_recipient_id = :id", { id: req.params.recipient_id })
+        .orderBy("timestamp", "ASC")
         .skip(offset)
         .take(limit)
         .getManyAndCount();
@@ -47,7 +48,7 @@ export const EventsController = {
 
       const data = events.map((event: any) => {
         const fieldKeys = Object.keys(event.payload);
-        const excludedFields = [];
+        const excludedFields = ["id", "event_type", "timestamp"];
 
         for (let i = 0; i < fieldKeys.length; i++) {
           if (

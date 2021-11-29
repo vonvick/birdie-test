@@ -2,9 +2,15 @@ import React from "react";
 import styled from "styled-components"
 import { Table } from "../utility/Table";
 import { TableHeaderInterface} from "../../typings";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {getRecipients} from "../../redux/features/recipients/recipientSlice";
 import { useNavigate } from "react-router-dom";
+import {clearRecipientEvents, setEventStatus} from "../../redux/features/events/eventsSlice";
+
+const StyledCareRecipientWrapper = styled.div`
+  padding: 0 15px;
+  
+`;
 
 const CareRecipientsTable = styled(Table)`
   width: 100%;
@@ -17,6 +23,8 @@ const CareRecipientsTable = styled(Table)`
   thead td {
     padding: 5px;
     border-left: 1px solid #808585;
+    height: 70px;
+    font-weight: bold;
   }
   
   tbody tr {
@@ -24,7 +32,7 @@ const CareRecipientsTable = styled(Table)`
       background-color: #efefef;
     }
     :hover {
-      background-color: lightpink;
+      background-color: #54c5c1;
     }
     cursor: pointer;
   }
@@ -32,6 +40,7 @@ const CareRecipientsTable = styled(Table)`
   tbody td {
     padding: 5px;
     border-left: 1px solid #808585;
+    height: 50px;
   }
 `;
 
@@ -46,6 +55,7 @@ const CareRecipientTableHeader = styled(Table.Th)`
 
 const CareRecipientsList = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const tableHeaders: TableHeaderInterface[] = [
     {
@@ -63,11 +73,13 @@ const CareRecipientsList = () => {
   const recipients = useSelector(getRecipients);
 
   const loadRecipientEvents = (recipientId: string) => {
+    dispatch(setEventStatus("empty"));
+    dispatch(clearRecipientEvents());
     navigate(`/recipients/${recipientId}`);
   }
 
   return (
-    <div>
+    <StyledCareRecipientWrapper>
       <h2>Care Recipients</h2>
 
       <p>Click on a care recipient to view the events for them.</p>
@@ -105,7 +117,7 @@ const CareRecipientsList = () => {
           }
         </Table.Body>
       </CareRecipientsTable>
-    </div>
+    </StyledCareRecipientWrapper>
   );
 };
 

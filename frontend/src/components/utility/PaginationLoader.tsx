@@ -1,0 +1,55 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
+import {ExtendedProps, Status} from "../../typings";
+
+interface PaginationProps extends ExtendedProps {
+  paginationState: Status,
+  handleLoadMore: () => void
+}
+
+const StyledPaginationLoader = styled.div`
+  border-radius: 50%;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  position: absolute;
+  top: -20px;
+  
+  button {
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    background: #54c5c1;
+    border: none;
+    cursor: pointer;
+  }
+`;
+
+const PaginationLoader = ({ paginationState, handleLoadMore }: PaginationProps) => {
+  if (paginationState === "loading") {
+    return (
+      <StyledPaginationLoader>
+        <FontAwesomeIcon icon="circle-notch" size="4x" spin />
+      </StyledPaginationLoader>
+    );
+  } else if (paginationState === "completed") {
+    return (
+      <StyledPaginationLoader>
+        <button>All data fetched!</button>
+      </StyledPaginationLoader>
+    );
+  } else if (paginationState === "loaded") {
+    return (
+      <StyledPaginationLoader>
+        <button onClick={handleLoadMore}>Click to load more</button>
+      </StyledPaginationLoader>
+    );
+  } else {
+    return (
+      <StyledPaginationLoader>
+        <button>No data found!</button>
+      </StyledPaginationLoader>
+    );
+  }
+};
+
+export default PaginationLoader;

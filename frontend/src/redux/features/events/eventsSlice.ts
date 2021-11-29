@@ -39,15 +39,20 @@ export const eventsSlice = createSlice({
     setEventStatus: (state, action: PayloadAction<Status>) => {
       return { ...state, eventStatus: action.payload }
     },
+    clearRecipientEvents: (state) => {
+      eventsAdapter.removeAll(state);
+    },
     fetchEvents: (state, action: PayloadAction<PaginationRequestInterface>) => {},
   },
 });
 
-export const { setEvents, fetchEvents, setPagination, setEventStatus } = eventsSlice.actions;
+export const { setEvents, fetchEvents, setPagination, setEventStatus, clearRecipientEvents } = eventsSlice.actions;
 export default eventsSlice.reducer;
 
 export const {
-  selectAll: selectAllRecipientEvents
+  selectAll: selectAllRecipientEvents,
+  selectIds: selectAllRecipientEventIds,
+  selectById: selectEventsById
 } = eventsAdapter.getSelectors((state: RootState) => state.events);
 export const getEventsPagination = (state: RootState) => state.events.pagination;
 export const getEventsStatus = (state: RootState) => state.events.eventStatus;

@@ -10,6 +10,7 @@ import {useEffect} from "react";
 import {setCurrentRecipientId} from "../../redux/features/recipients/recipientSlice";
 import PaginationLoader from "../utility/PaginationLoader";
 import {Status} from "../../typings";
+import {EntityId} from "@reduxjs/toolkit";
 
 const StyledEventsWrapper = styled.div`
   display: flex;
@@ -56,19 +57,29 @@ const RecipientEvents = () => {
     dispatch(fetchEvents({ page: paginationData.currentPage + 1, perPage: paginationData.pageSize }))
   }
 
+  const eventsData = (ids: EntityId[]) => {
+    if (ids.length > 0) {
+      return (
+        ids.map((eventId, index) => {
+          return(
+            <EventCard key={index} eventId={eventId} />
+          )
+        })
+      );
+    } else {
+      return (
+        <h4>No events exists for this recipient. Check that the recipient is valid.</h4>
+      );
+    }
+  }
+
   return (
     <StyledEventsWrapper>
       <h2>Recipient Events</h2>
       <div className="pagination-container">
         <PaginationLoader paginationState={eventStatus as Status} handleLoadMore={() => loadMoreEvents()} />
       </div>
-      <StyledEventsContainer>
-        { eventsIds.map((eventId, index) => {
-          return(
-            <EventCard key={index} eventId={eventId} />
-          )
-        }) }
-      </StyledEventsContainer>
+      <StyledEventsContainer>{ eventsData(eventsIds) }</StyledEventsContainer>
     </StyledEventsWrapper>
   );
 };

@@ -1,4 +1,4 @@
-import {createEntityAdapter, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {PaginationInterface, PaginationRequestInterface, RecipientInterface} from "../../../typings";
 import {RootState} from "../../store";
 
@@ -27,7 +27,9 @@ export const recipientsSlice = createSlice({
     setCurrentRecipientId: (state, action: PayloadAction<string>) => {
       return { ...state, currentRecipientId: action.payload }
     },
-    fetchRecipients: (state, action: PayloadAction<PaginationRequestInterface>) => {}
+    fetchRecipients: (state, action: PayloadAction<PaginationRequestInterface>) => {
+      console.log('Fetch Recipient')
+    }
   }
 });
 

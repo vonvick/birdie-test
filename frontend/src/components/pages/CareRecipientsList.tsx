@@ -80,7 +80,7 @@ const CareRecipientsList = () => {
 
   return (
     <StyledCareRecipientWrapper>
-      <h2>Care Recipients</h2>
+      <h2>Care Recipients List</h2>
 
       <p>Click on a care recipient to view the events for them.</p>
 

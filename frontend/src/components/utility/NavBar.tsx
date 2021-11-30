@@ -17,6 +17,9 @@ const StyledLogo = styled.div`
   height: 90px;
   align-items: center;
   justify-content: center;
+  a {
+    width: 100%;
+  }
 `;
 
 const StyledMenuList = styled.ul`
@@ -46,9 +49,9 @@ const NavBar = () => {
   ];
   const logoUrl = "https://assets.website-files.com/5d80c03f1edd7bd68fcdb623/6095ef73185566645ff6812f_5d80c151ddf52828d3cff080_Birdie%20-%20Logo%20-%20Blue%20%2B%20Green.svg"
   return (
-    <StyledNav>
+    <StyledNav data-testid="nav-bar">
       <StyledLogo>
-        <img src={logoUrl} alt="logo"/>
+        <Link to="/"><img src={logoUrl} alt="logo"/></Link>
       </StyledLogo>
       <StyledMenuList>
         {menuList.map((menu, index) => {

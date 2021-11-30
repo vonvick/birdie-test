@@ -13,10 +13,15 @@ export function* handleRecipientEvents(action: PayloadAction<PaginationRequestIn
 
     if (currentPage < pageCount || typeof pageCount === 'undefined') {
       const response = yield call(requestRecipientEvents, { recipientId, perPage, page });
-      const { data } = response;
-      yield put(setEvents(data.data));
-      yield put(setPagination({ ...data.pagination }));
-      yield put(setEventStatus("loaded"))
+      const { data: { data, pagination } } = response;
+      yield put(setEvents(data));
+
+      if (pagination.currentPage < pagination.pageCount) {
+        yield put(setEventStatus("loaded"));
+      } else {
+        yield put(setEventStatus("completed"));
+      }
+      yield put(setPagination({ ...pagination }));
     } else {
       yield put(setEventStatus("completed"));
     }

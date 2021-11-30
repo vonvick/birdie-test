@@ -33,7 +33,8 @@ import {
   faRestroom,
   faWindowClose,
   faCheckSquare,
-  faCircleNotch
+  faCircleNotch,
+  faHome
 } from '@fortawesome/free-solid-svg-icons'
 import './App.css';
 import { fetchRecipients } from "./redux/features/recipients/recipientSlice";
@@ -42,6 +43,7 @@ import RecipientEvents from "./components/pages/RecipientEvents";
 import NavBar from "./components/utility/NavBar";
 import styled from "styled-components";
 import {clearEventTypesStore, fetchEventTypes} from "./redux/features/eventsTypes/eventTypesSlice";
+import NotFound from "./components/pages/NotFound";
 
 library.add(faExclamation,
   faBell,
@@ -69,7 +71,8 @@ library.add(faExclamation,
   faRestroom,
   faWindowClose,
   faCheckSquare,
-  faCircleNotch
+  faCircleNotch,
+  faHome
 );
 
 const StyledAppWrapper = styled.div`
@@ -97,8 +100,9 @@ function App() {
 
         <StyledAppWrapper>
           <Routes>
-            <Route path="/" element={<CareRecipientsList />}></Route>
+            <Route index element={<CareRecipientsList />}></Route>
             <Route path="/recipients/:recipientId" element={<RecipientEvents />}></Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </StyledAppWrapper>
       </div>

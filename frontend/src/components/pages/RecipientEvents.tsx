@@ -20,12 +20,6 @@ const StyledEventsWrapper = styled.div`
   h2 {
     padding: 0 15px;
   }
-  .pagination-container {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
 `;
 
 const StyledEventsContainer = styled.div`
@@ -76,14 +70,12 @@ const RecipientEvents = () => {
         <h4>No events exists for this recipient. Check that the recipient is valid.</h4>
       );
     }
-  }
+  };
 
   return (
     <StyledEventsWrapper data-testid="recipient-event">
       <h2>Recipient Events</h2>
-      <div className="pagination-container">
-        <PaginationLoader paginationState={eventStatus as Status} handleLoadMore={() => loadMoreEvents()} />
-      </div>
+      <PaginationLoader paginationState={eventStatus as Status} handleLoadMore={() => loadMoreEvents()} />
       <StyledEventsContainer>{ eventsData(eventsIds) }</StyledEventsContainer>
     </StyledEventsWrapper>
   );

@@ -7,6 +7,13 @@ interface PaginationProps extends ExtendedProps {
   handleLoadMore: () => void
 }
 
+const StyledPaginationWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
 const StyledPaginationLoader = styled.div`
   border-radius: 50%;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -25,31 +32,39 @@ const StyledPaginationLoader = styled.div`
 `;
 
 const PaginationLoader = ({ paginationState, handleLoadMore }: PaginationProps) => {
-  if (paginationState === "loading") {
-    return (
-      <StyledPaginationLoader>
-        <FontAwesomeIcon icon="circle-notch" size="4x" spin />
-      </StyledPaginationLoader>
-    );
-  } else if (paginationState === "completed") {
-    return (
-      <StyledPaginationLoader>
-        <button>All data fetched!</button>
-      </StyledPaginationLoader>
-    );
-  } else if (paginationState === "loaded") {
-    return (
-      <StyledPaginationLoader>
-        <button onClick={handleLoadMore}>Click to load more</button>
-      </StyledPaginationLoader>
-    );
-  } else {
-    return (
-      <StyledPaginationLoader>
-        <button>No data found!</button>
-      </StyledPaginationLoader>
-    );
+  const renderedLoader = () => {
+    if (paginationState === "loading") {
+      return (
+        <StyledPaginationLoader>
+          <FontAwesomeIcon icon="circle-notch" size="4x" spin />
+        </StyledPaginationLoader>
+      );
+    } else if (paginationState === "completed") {
+      return (
+        <StyledPaginationLoader>
+          <button>All data fetched!</button>
+        </StyledPaginationLoader>
+      );
+    } else if (paginationState === "loaded") {
+      return (
+        <StyledPaginationLoader>
+          <button onClick={handleLoadMore}>Click to load more</button>
+        </StyledPaginationLoader>
+      );
+    } else {
+      return (
+        <StyledPaginationLoader>
+          <button>No data found!</button>
+        </StyledPaginationLoader>
+      );
+    }
   }
+
+  return (
+    <StyledPaginationWrapper>
+      { renderedLoader() }
+    </StyledPaginationWrapper>
+  );
 };
 
 export default PaginationLoader;

@@ -27,9 +27,7 @@ export const recipientsSlice = createSlice({
     setCurrentRecipientId: (state, action: PayloadAction<string>) => {
       return { ...state, currentRecipientId: action.payload }
     },
-    fetchRecipients: (state, action: PayloadAction<PaginationRequestInterface>) => {
-      console.log('Fetch Recipient')
-    }
+    fetchRecipients: (state, action: PayloadAction<PaginationRequestInterface>) => {}
   }
 });
 

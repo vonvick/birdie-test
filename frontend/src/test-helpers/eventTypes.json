@@ -1,0 +1,28 @@
+{
+  "data":[
+    {
+      "id":"alert_qualified",
+      "fields":["alert_severity"]
+    },
+    {
+      "id":"alert_raised",
+      "fields":[]
+    },
+    {
+      "id":"catheter_observation",
+      "fields":["note","volume_ml"]
+    },
+    {
+      "id":"check_in",
+      "fields":[]
+    },
+    {
+      "id":"check_out",
+      "fields":[]
+    },
+    {
+      "id":"concern_raised",
+      "fields":["note","severity","navigation","screenProps","observations"]
+    }
+  ]
+}

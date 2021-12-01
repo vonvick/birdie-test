@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "care_recipient_id": "ad3512a6-91b1-4d7d-a005-6f8764dd0111"
+    },
+    {
+      "care_recipient_id": "df50cac5-293c-490d-a06c-ee26796f850d"
+    },
+    {
+      "care_recipient_id": "e3e2bff8-d318-4760-beea-841a75f00227"
+    }
+  ],
+  "pagination": {
+    "currentPage": 1,
+    "pageCount": 1,
+    "pageSize": 10,
+    "totalCount": 3
+  }
+}

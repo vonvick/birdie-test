@@ -79,3 +79,10 @@ export interface IconMappingsInterface {
   visit_completed: IconName;
   [x: string]: IconName;
 }
+
+export interface PaginationResult {
+  currentPage: number;
+  pageCount: number;
+  pageSize: number;
+  totalCount: number;
+}

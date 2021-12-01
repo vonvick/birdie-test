@@ -11,6 +11,7 @@ import {setCurrentRecipientId} from "../../redux/features/recipients/recipientSl
 import PaginationLoader from "../utility/PaginationLoader";
 import {Status} from "../../typings";
 import {EntityId} from "@reduxjs/toolkit";
+import {clearEventTypesStore, fetchEventTypes} from "../../redux/features/eventsTypes/eventTypesSlice";
 
 const StyledEventsWrapper = styled.div`
   display: flex;
@@ -37,12 +38,16 @@ const StyledEventsContainer = styled.div`
 `;
 
 const RecipientEvents = () => {
+  const dispatch = useDispatch();
   const eventsIds = useSelector(selectAllRecipientEventIds);
   const eventStatus = useSelector(getEventsStatus);
   const paginationData = useSelector(getEventsPagination)
-  const { recipientId } = useParams();
-  const dispatch = useDispatch();
+  const { recipientId } = useParams() as any;
 
+  useEffect(() => {
+    dispatch(clearEventTypesStore())
+    dispatch(fetchEventTypes())
+  }, [dispatch]);
 
   useEffect(() => {
     if (recipientId) {
@@ -74,7 +79,7 @@ const RecipientEvents = () => {
   }
 
   return (
-    <StyledEventsWrapper>
+    <StyledEventsWrapper data-testid="recipient-event">
       <h2>Recipient Events</h2>
       <div className="pagination-container">
         <PaginationLoader paginationState={eventStatus as Status} handleLoadMore={() => loadMoreEvents()} />

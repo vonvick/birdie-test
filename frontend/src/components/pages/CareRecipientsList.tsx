@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components"
 import { Table } from "../utility/Table";
 import { TableHeaderInterface} from "../../typings";
 import { useSelector, useDispatch } from "react-redux";
-import {getRecipients} from "../../redux/features/recipients/recipientSlice";
-import { useNavigate } from "react-router-dom";
+import {fetchRecipients, getRecipients} from "../../redux/features/recipients/recipientSlice";
+import { useHistory } from "react-router-dom";
 import {clearRecipientEvents, setEventStatus} from "../../redux/features/events/eventsSlice";
 
 const StyledCareRecipientWrapper = styled.div`
@@ -54,8 +54,12 @@ const CareRecipientTableHeader = styled(Table.Th)`
 `;
 
 const CareRecipientsList = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchRecipients({ perPage: 10, page: 1 }));
+  }, [dispatch]);
 
   const tableHeaders: TableHeaderInterface[] = [
     {
@@ -75,7 +79,7 @@ const CareRecipientsList = () => {
   const loadRecipientEvents = (recipientId: string) => {
     dispatch(setEventStatus("empty"));
     dispatch(clearRecipientEvents());
-    navigate(`/recipients/${recipientId}`);
+    history.push(`/recipients/${recipientId}`);
   }
 
   return (
@@ -102,6 +106,7 @@ const CareRecipientsList = () => {
               return (
                 <CareRecipientTableRow
                   key={index}
+                  data-testid={recipient.care_recipient_id}
                   onClick={() => loadRecipientEvents(recipient.care_recipient_id)}
                 >
                   {

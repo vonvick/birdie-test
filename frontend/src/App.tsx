@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from "react-redux";
+import React from 'react';
 import {
   BrowserRouter as Router,
-  Routes,
+  Switch,
   Route
 } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core"
@@ -37,12 +36,10 @@ import {
   faHome
 } from '@fortawesome/free-solid-svg-icons'
 import './App.css';
-import { fetchRecipients } from "./redux/features/recipients/recipientSlice";
 import CareRecipientsList from "./components/pages/CareRecipientsList";
 import RecipientEvents from "./components/pages/RecipientEvents";
 import NavBar from "./components/utility/NavBar";
 import styled from "styled-components";
-import {clearEventTypesStore, fetchEventTypes} from "./redux/features/eventsTypes/eventTypesSlice";
 import NotFound from "./components/pages/NotFound";
 
 library.add(faExclamation,
@@ -82,28 +79,23 @@ const StyledAppWrapper = styled.div`
 `;
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(clearEventTypesStore())
-    dispatch(fetchEventTypes())
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchRecipients({ perPage: 10, page: 1 }));
-  }, [dispatch]);
-
   return (
     <Router>
       <div>
         <NavBar/>
 
         <StyledAppWrapper>
-          <Routes>
-            <Route index element={<CareRecipientsList />}></Route>
-            <Route path="/recipients/:recipientId" element={<RecipientEvents />}></Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Switch>
+            <Route exact path="/">
+              <CareRecipientsList />
+            </Route>
+            <Route path="/recipients/:recipientId">
+              <RecipientEvents />
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
         </StyledAppWrapper>
       </div>
     </Router>

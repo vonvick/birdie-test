@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {MenuList} from "../../typings";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const StyledNav = styled.nav`
   display: flex;
